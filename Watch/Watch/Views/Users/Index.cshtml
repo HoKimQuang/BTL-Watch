@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Watch.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Danh Sách Danh Mục</h2>
+                <div class="card-tools">
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0" style="height: 680px;">
+                <table class="table table-head-fixed text-nowrap table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                Tên Đăng Nhập
+                            </th>
+                            <th>
+                                Mật Khẩu
+                            </th>
+                            <th>
+                                Họ Tên
+                            </th>
+                            <th>
+                               Số Điện Thoại
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Quyền
+                            </th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TaiKhoan)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MatKhau)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HoTen)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SDT)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Quyen)
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+

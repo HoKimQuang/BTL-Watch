@@ -1,0 +1,55 @@
+﻿@model Watch.Models.Product
+@using System.Globalization;
+@{
+    ViewBag.Title = "DetailProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");   // try with "en-US"
+    string price = Model.DonGia.ToString("#,###", cul.NumberFormat);
+}
+
+
+<div class="mens">
+    <div class="main">
+        <div class="wrap">
+            
+            <div class="cont span_2_of_3">
+                <h2 class="head">Chi Tiết Sản Phẩm</h2>
+                <div class="grid images_3_of_2">
+                    <ul id="etalage">
+                        <li>
+                            <a href="#">
+                                @if (Model.HinhAnh == null)
+                                {
+                                    <img class="etalage_thumb_image img-responsive" src="~/Template/ShopWatch/images/imageNotVal.png" alt="" />
+                                }
+                                else
+                                {
+                                    <img class="etalage_thumb_image img-responsive" src="~/FileUploads/@Model.HinhAnh" alt="" />
+                                }
+
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="desc1 span_3_of_2">
+                    <h3 class="m_3">@Model.TenSP</h3>
+                    <p class="m_5"> @price VND</p>
+                    <div class="btn_form">
+                        <form>
+                            <input type="submit" value="Thêm Vào Giỏ Hàng" title="">
+                        </form>
+                    </div>
+                    <span class="m_link">Mô Tả Sản Phẩm </span>
+                    <p class="m_text2">@Model.MoTa </p>
+                </div>
+                <div class="clear"></div>
+
+            </div>
+
+            <div class="clear"></div>
+        </div>
+
+
+    </div>
+</div>

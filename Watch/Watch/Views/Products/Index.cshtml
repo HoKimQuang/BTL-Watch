@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Watch.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Danh Sách Sản Phẩm</h2>
+
+                <div class="card-tools"> 
+                    <p>
+                        @Html.ActionLink("Thêm Mới Sản Phẩm", "Create", null, new { @class = "btn btn-primary" })
+                    </p>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0" style="height: 680px;">
+                <table class="table table-head-fixed text-nowrap table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                Danh Mục
+                            </th>
+                            <th>
+                                Tên Sản Phẩm
+                            </th>
+                            <th>
+                                Số Lượng
+                            </th>
+                            <th>
+                                Đơn Giá
+                            </th>
+                            <th>
+                                Mô tả
+                            </th>
+                            <th>
+                                Hình Ảnh
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td style=" vertical-align: middle;">
+                                @Html.DisplayFor(modelItem => item.Category.TenDM)
+                            </td>
+                            <td style=" vertical-align: middle;">
+                                @Html.DisplayFor(modelItem => item.TenSP)
+                            </td>
+                            <td style=" vertical-align: middle;">
+                                @Html.DisplayFor(modelItem => item.SoLuong)
+                            </td>
+                            <td style=" vertical-align: middle;">
+                                @Html.DisplayFor(modelItem => item.DonGia)
+                            </td>
+                            <td style=" vertical-align: middle;">
+                                @Html.DisplayFor(modelItem => item.MoTa)
+                            </td>
+                            <td>
+                                @if (item.HinhAnh != null)
+                                {
+                                    <img src="~/FileUploads/@item.HinhAnh" height="150" width="150" alt="Image preview..." id="imgPr" style="margin-top: 5px; object-fit: contain;">
+                                }
+
+                            </td>
+                            <td style=" vertical-align: middle;">
+                                @Html.ActionLink("Cập Nhật", "Edit", new { id = item.ID }, new { @class = "btn btn-warning" }) &nbsp
+                                @Html.ActionLink("Chi Tiết", "Details", new { id = item.ID }, new { @class = "btn btn-info" }) &nbsp
+                                <a onclick=" return confirm('Bạn Muốn Xóa Sản Phẩm Này?');" href="/Products/DeleteConfirmed/@item.ID" class="btn btn-danger">Xóa</a>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+

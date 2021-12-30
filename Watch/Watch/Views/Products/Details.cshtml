@@ -1,0 +1,74 @@
+﻿@model Watch.Models.Product
+@using System.Globalization;
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");   // try with "en-US"
+    string price = Model.DonGia.ToString("#,###", cul.NumberFormat);
+}
+
+
+<div class="container-fluid">
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Chi Tiết Sản Phẩm</h3>
+        </div>
+        <form action="" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <div class="card-body">
+                <div class="row">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.ID)
+                    @Html.HiddenFor(model => model.HinhAnh)
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Tên Sản Phẩm</label>
+                            <input type="text" name="TenSP" value="@Model.TenSP" class="form-control" disabled>
+                        </div>
+                        <!-- /.form-group -->
+                        <div class="form-group">
+                            <label>Danh Mục Sản Phẩm</label>
+                            <input type="text" name="TenDM" value="@Model.Category.TenDM" class="form-control" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label style="display:block ; width:100%">Hình Ảnh</label>
+                            @if (@Model.HinhAnh != null)
+                            {
+                                <img src="~/FileUploads/@Model.HinhAnh" height="150" width="150" alt="Image preview..." id="imgPr" style="margin-top: 5px;">
+                            }
+                            else
+                            {
+                                <img src="" height="150" width="150" alt="Image preview..." id="imgPr" hidden style="margin-top: 5px;">
+                            }
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Số Lượng</label>
+                            <input type="text" name="TenSP" value="@Model.SoLuong" class="form-control" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Đơn giá</label>
+                            <input type="text" name="TenSP" value="@price" class="form-control" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>Mô Tả Sản Phẩm</label>
+                            <textarea class="form-control" name="MoTa" rows="6" disabled>@Model.MoTa</textarea>
+
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+        </form>
+    </div>
+
+</div><!-- /.card -->
+
+<p>
+    @Html.ActionLink("Cập Nhật", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Danh Sách Sản Phẩm", "Index")
+</p>
