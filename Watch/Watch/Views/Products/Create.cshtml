@@ -1,0 +1,92 @@
+﻿@model Watch.Models.Product
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Thêm Mới Sản Phẩm</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form action="" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <div class="card-body">
+                <div class="row">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Tên Sản Phẩm</label>
+                            <input type="text" name="TenSP" class="form-control" placeholder="Nhập Tên Sản Phẩm">
+                            @Html.ValidationMessageFor(model => model.TenSP, "", new { @class = "text-danger" })
+                        </div>
+                        <!-- /.form-group -->
+                        <div class="form-group">
+                            <label>Danh Mục Sản Phẩm</label>
+                            @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="form-group">
+                            <input type="file" name="image" onchange="previewFile()"><br>
+                            <img src="" height="150" width="150" alt="Image preview..." id="imgPr" hidden style="margin-top: 5px;">
+                            <script>
+                                function previewFile() {
+                                    var preview = document.getElementById('imgPr');
+                                    var file = document.querySelector('input[type=file]').files[0];
+                                    var reader = new FileReader();
+
+                                    reader.addEventListener("load", function () {
+                                        preview.src = reader.result;
+                                        preview.hidden = false;
+                                    }, false);
+
+                                    if (file) {
+                                        reader.readAsDataURL(file);
+                                    }
+                                }
+                            </script>
+                            @Html.ValidationMessageFor(model => model.HinhAnh)
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Số Lượng</label>
+                            <input type="number" name="SoLuong" class="form-control" placeholder="Nhập Số Lượng">
+                            @Html.ValidationMessageFor(model => model.SoLuong, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>Đơn giá</label>
+                            <input type="number" name="DonGia" class="form-control" placeholder="Nhập Đơn Giá">
+                            @Html.ValidationMessageFor(model => model.DonGia, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Mô Tả Sản Phẩm</label>
+                            <textarea class="form-control" name="MoTa" rows="6" placeholder="Nhập Mô Tả Sản Phẩm ..."></textarea>
+                            @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Thêm Sản Phẩm</button>
+            </div>
+        </form>
+    </div>
+
+</div><!-- /.card -->
+
+
+<div>
+    @Html.ActionLink("Danh Sách Sản Phẩm", "Index")
+</div>

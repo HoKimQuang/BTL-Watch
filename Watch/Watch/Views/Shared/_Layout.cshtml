@@ -1,0 +1,102 @@
+﻿@using Watch.Models
+@{
+    User user = Session["User"] as User;
+    List<Category> categories = Session["Categories"] as List<Category>;
+}
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Free Leoshop Website Template | Home :: w3layouts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href='http://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
+    <link href="~/Template/ShopWatch/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Template/ShopWatch/css/form.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="~/Template/ShopWatch/js/jquery1.min.js"></script>
+    <!-- start menu -->
+    <link href="~/Template/ShopWatch/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="~/Template/ShopWatch/js/megamenu.js"></script>
+    <script>$(document).ready(function () { $(".megamenu").megamenu(); });</script>
+    <!--start slider -->
+    <link rel="stylesheet" href="~/Template/ShopWatch/css/fwslider.css" media="all">
+    <script src="~/Template/ShopWatch/js/jquery-ui.min.js"></script>
+    <script src="~/Template/ShopWatch/js/css3-mediaqueries.js"></script>
+    <script src="~/Template/ShopWatch/js/fwslider.js"></script>
+    <!--end slider -->
+    <script src="~/Template/ShopWatch/js/jquery.easydropdown.js"></script>
+</head>
+<body>
+    <div class="header-top">
+        <div class="wrap">
+            <div class="header-top-left">
+            </div>
+            <div class="cssmenu">
+                <ul>
+                    @if (Session["User"] != null)
+                    {
+                        <li><a href="#">@user.HoTen</a></li>
+
+                        if (user.Quyen == 0)
+                        {
+                            <li><a href="~/Admin/Index">Quản trị website</a></li>
+                        }
+
+                        <li><a href="~/Authentication/LogOut">Đăng Xuất</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="~/Authentication/Login">Đăng Nhập</a></li>
+                    }
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="header-bottom">
+        <div class="wrap">
+            <div class="header-bottom-left">
+                <div class="logo">
+                    <a href="#"><img src="~/Template/ShopWatch/images/logo.png" alt="" /></a>
+                </div>
+                <div class="menu">
+                    <ul class="megamenu skyblue">
+                        <li class="active grid"><a href="~/Home/Index">Trang Chủ</a></li>
+                        <li>
+                            <a class="color5" href="#">Danh Mục Sản Phầm</a>
+                            @if (Session["Categories"] != null)
+                            {
+                                <div class="megapanel">
+                                    <div class="col1">
+                                        <div class="h_nav">
+                                            <h4>Đồng Hồ</h4>
+                                            <ul>
+
+                                                @foreach (var item in categories)
+                                                {
+                                                    <li><a href="~/Home/ListProduct/@item.ID">@item.TenDM</a></li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    @RenderBody()
+    <div class="footer" style="position:fixed; bottom: 0px; width:100%">
+        <div class="footer-bottom">
+            <div class="wrap">
+                <div class="copy">
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
