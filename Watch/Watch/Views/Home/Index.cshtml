@@ -1,5 +1,8 @@
-﻿@{
+﻿@model IEnumerable<Watch.Models.Product>
+@using System.Globalization;
+@{
     ViewBag.Title = "Home Page";
+    CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");   // try with "en-US"
 }
 
 <div id="fwslider">
@@ -16,4 +19,56 @@
     <div class="timers"></div>
     <div class="slidePrev"><span></span></div>
     <div class="slideNext"><span></span></div>
+</div>
+<div class="mens">
+    <div class="main">
+        <div class="wrap">
+            <div class="cont span_2_of_3">
+                <h2 class="head">Danh Sách Sản Phẩm</h2>
+                <div class="top-box">
+                    @foreach (var item in Model)
+                    {
+
+                        string price = item.DonGia.ToString("#,###", cul.NumberFormat);
+
+                        <div class="col_1_of_3 span_1_of_3" style="margin: 1% 0 1% 2.1%">
+                            <a href="~/Home/DetailProduct/@item.ID">
+                                <div class="inner_content clearfix">
+                                    <div class="product_image">
+                                        @if (item.HinhAnh == null)
+                                        {
+                                            <img src="~/Template/ShopWatch/images/imageNotVal.png" alt="" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/FileUploads/@item.HinhAnh" alt="" style="width: 175px; height: 160px; object-fit:contain" />
+                                        }
+
+
+                                    </div>
+
+                                    <div class="price">
+                                        <div class="cart-left">
+                                            <p class="title" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">@item.TenSP</p>
+                                            <div class="price1">
+                                                <span class="actual">@price VND</span>
+                                            </div>
+                                        </div>
+                                        <div class="cart-right"> </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+
+                    }
+                    <div class="clear"></div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
 </div>

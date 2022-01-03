@@ -33,6 +33,23 @@ namespace Watch.Controllers
         [HttpPost]
         public ActionResult Login(string taiKhoan, string matKhau)
         {
+
+            if (string.IsNullOrEmpty(taiKhoan) || string.IsNullOrEmpty(matKhau))
+            {
+                if (string.IsNullOrEmpty(taiKhoan) )
+                {
+                    ViewBag.tkval = "Tên đăng nhập không được để trống!"; 
+                }
+                if (string.IsNullOrEmpty(matKhau))
+                {
+                    ViewBag.mkval = "Mật khẩu không được để trống!";
+                    
+                }
+
+                return View();
+            }
+            
+
             var user = db.Users.FirstOrDefault(x => x.TaiKhoan == taiKhoan && x.MatKhau == matKhau);
             if (user == null)
             {
