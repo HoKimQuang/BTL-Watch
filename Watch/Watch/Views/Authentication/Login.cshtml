@@ -11,20 +11,38 @@
             <div class="login-title">
                 <h4 class="title">Đăng Nhập Vào Website</h4>
                 <div id="loginbox" class="loginbox">
-                    <form action="" method="post" >
+                    <form action="" method="post">
                         <fieldset class="input">
                             <p id="login-form-username">
                                 <label for="modlgn_username">Tên Đăng Nhập</label>
                                 <input id="modlgn_username" type="text" name="taiKhoan" class="inputbox" size="18" autocomplete="off">
                             </p>
+                            @if (ViewBag.tkval != null)
+                            {
+                                <br />
+                                <p style="color:red">@ViewBag.tkval</p>
+                                <br />
+                            }
                             <p id="login-form-password">
                                 <label for="modlgn_passwd">Mật Khẩu</label>
                                 <input id="modlgn_passwd" type="password" name="matKhau" class="inputbox" size="18" autocomplete="off">
                             </p>
+                            @if (ViewBag.mkval != null)
+                            {
+                                <br />
+                                <p style="color:red">@ViewBag.mkval</p>
+                                
+                            }
+                            @if (ViewBag.err != null)
+                            {
+                                <br />
+                                <p style="color:red">@ViewBag.err</p>
+                            }
                             <div class="remember">
                                 <input type="submit" name="Submit" class="button" value="Đăng Nhập"><div class="clear"></div>
                             </div>
                         </fieldset>
+                       
                     </form>
                 </div>
             </div>

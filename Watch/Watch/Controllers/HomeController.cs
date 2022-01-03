@@ -20,7 +20,10 @@ namespace Watch.Controllers
         {
             if (Session["User"] != null)
             {
-                return View();
+                var products = db.Products.Include(p => p.Category);
+                
+                return View(products.ToList());
+               
             }
             else
             {
